@@ -6,3 +6,34 @@
   display: inline-block;
   margin-right: 1rem;
 }
+
+
+/* written by sanjay */
+form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-items: center;
+}
+
+#title{
+  text-align: center;
+  color: rgb(194, 191, 197);
+}
+
+#input{
+  width: 30%;
+  margin: auto;
+  padding: 10px;
+  font-size: 15px;
+
+}
+
+#submit{
+  width: 30%;
+  padding: 10px;
+  margin: auto;
+  font-size: 15px;
+  margin-top: 25px;
+  border-radius: 10px;
+}

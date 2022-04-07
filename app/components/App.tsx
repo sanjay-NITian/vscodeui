@@ -34,30 +34,58 @@ export const App = () => {
     });
   };
 
-  return (
-    <Router
-      initialEntries={['/', '/about', '/message', '/message/received', '/message/send']}
-    >
-      <ul className="navbar">
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/about">About</Link>
-        </li>
-        <li>
-          <Link to="/message">Message</Link>
-        </li>
-      </ul>
-      <button onClick={handleReloadWebview}>Reload Webview</button>
+  const submit = async (event: any)=>{
+    event.preventDefault();
+    const msg = document.getElementById("input") as HTMLInputElement;
+    // console.log(msg.value);
+    const res = await fetch("http://localhost:8888/api/send", {
+      method:"POST", body:msg.value
+    });
+    msg.value = '';
+    // console.log(res);
+  };
 
-      <MessagesContext.Provider value={messagesFromExtension}>
-        <Switch>
-          {routes.map((route, i) => (
-            <RouteWithSubRoutes key={i} {...route} />
-          ))}
-        </Switch>
-      </MessagesContext.Provider>
-    </Router>
+  return (
+    <div id="outer-main">
+        <header>
+            <h1 id="title">
+                Welcome to 314e Corp Messaging Extension
+            </h1>
+        </header>
+        <div id="main">
+            <form onSubmit={submit}>
+                <input id="input" type="text"/>
+                <button type="submit" id="submit" placeholder='Enter some message'> Click to Send</button>
+            </form>
+        </div>
+    </div>
+    
+
+
+    // <h1>HELLO SANJAY</h1>
+    // <Router
+    //   initialEntries={['/', '/about', '/message', '/message/received', '/message/send']}
+    // >
+    //   <ul className="navbar">
+    //     <li>
+    //       <Link to="/">Hoome</Link>
+    //     </li>
+    //     <li>
+    //       <Link to="/about">About</Link>
+    //     </li>
+    //     <li>
+    //       <Link to="/message">Message</Link>
+    //     </li>
+    //   </ul>
+    //   <button onClick={handleReloadWebview}>Reload Webview</button>
+
+    //   <MessagesContext.Provider value={messagesFromExtension}>
+    //     <Switch>
+    //       {routes.map((route, i) => (
+    //         <RouteWithSubRoutes key={i} {...route} />
+    //       ))}
+    //     </Switch>
+    //   </MessagesContext.Provider>
+    // </Router>
   );
 };
